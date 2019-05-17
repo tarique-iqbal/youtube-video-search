@@ -7,11 +7,13 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use PHPUnit\Framework\TestCase;
 use Pimple\Container;
 use YoutubeVideoSearch\Container\ContainerFactory;
+use YoutubeVideoSearch\Service\CliArgsService;
 use YoutubeVideoSearch\Service\ConfigService;
 use YoutubeVideoSearch\Service\CurlService;
 use YoutubeVideoSearch\Service\ExcelFileWriterService;
 use YoutubeVideoSearch\Service\YoutubeDataService;
 use YoutubeVideoSearch\Service\YoutubeVideoService;
+use YoutubeVideoSearch\YoutubeVideoSearchApplication;
 
 class ContainerFactoryTest extends TestCase
 {
@@ -29,5 +31,7 @@ class ContainerFactoryTest extends TestCase
         $this->assertInstanceOf(Spreadsheet::class, $container['Spreadsheet']);
         $this->assertInstanceOf(Xlsx::class, $container['Xlsx']);
         $this->assertInstanceOf(ExcelFileWriterService::class, $container['ExcelFileWriterService']);
+        $this->assertInstanceOf(CliArgsService::class, $container['CliArgsService']);
+        $this->assertInstanceOf(YoutubeVideoSearchApplication::class, $container['YoutubeVideoSearchApplication']);
     }
 }
