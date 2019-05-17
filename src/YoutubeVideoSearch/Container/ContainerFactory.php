@@ -6,6 +6,7 @@ use Pimple\Container;
 use YoutubeVideoSearch\Service\ConfigService;
 use YoutubeVideoSearch\Service\CurlService;
 use YoutubeVideoSearch\Service\YoutubeDataService;
+use YoutubeVideoSearch\Service\YoutubeVideoService;
 
 /**
  * Class ContainerFactory
@@ -46,6 +47,13 @@ class ContainerFactory
             return new YoutubeDataService(
                 $c['ConfigService'],
                 $c['CurlService']
+            );
+        };
+
+        $container['YoutubeVideoService'] = function ($c) {
+            return new YoutubeVideoService(
+                $c['ConfigService'],
+                $c['YoutubeDataService']
             );
         };
 

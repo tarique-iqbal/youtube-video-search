@@ -8,6 +8,7 @@ use YoutubeVideoSearch\Container\ContainerFactory;
 use YoutubeVideoSearch\Service\ConfigService;
 use YoutubeVideoSearch\Service\CurlService;
 use YoutubeVideoSearch\Service\YoutubeDataService;
+use YoutubeVideoSearch\Service\YoutubeVideoService;
 
 class ContainerFactoryTest extends TestCase
 {
@@ -21,5 +22,6 @@ class ContainerFactoryTest extends TestCase
         $this->assertInstanceOf(ConfigService::class, $container['ConfigService']);
         $this->assertInstanceOf(CurlService::class, $container['CurlService']);
         $this->assertInstanceOf(YoutubeDataService::class, $container['YoutubeDataService']);
+        $this->assertInstanceOf(YoutubeVideoService::class, $container['YoutubeVideoService']);
     }
 }
