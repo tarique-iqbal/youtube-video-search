@@ -7,6 +7,7 @@ use Pimple\Container;
 use YoutubeVideoSearch\Container\ContainerFactory;
 use YoutubeVideoSearch\Service\ConfigService;
 use YoutubeVideoSearch\Service\CurlService;
+use YoutubeVideoSearch\Service\YoutubeDataService;
 
 class ContainerFactoryTest extends TestCase
 {
@@ -19,5 +20,6 @@ class ContainerFactoryTest extends TestCase
         $this->assertInstanceOf(Container::class, $container);
         $this->assertInstanceOf(ConfigService::class, $container['ConfigService']);
         $this->assertInstanceOf(CurlService::class, $container['CurlService']);
+        $this->assertInstanceOf(YoutubeDataService::class, $container['YoutubeDataService']);
     }
 }
