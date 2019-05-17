@@ -24,5 +24,6 @@
         <server name="REQUEST_SCHEME" value="https"/>
         <server name="HTTP_HOST" value="httpbin.org"/>
         <server name="REQUEST_URI" value="get"/>
+        <const name="BASE_DIR" value="."/>
     </php>
 </phpunit>
