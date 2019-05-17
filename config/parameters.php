@@ -25,6 +25,10 @@ $config = [
             . '&id={id}'
             . '&key={key}',
     ],
+    'excel_file' => [
+        'directory' => 'var/data',
+        'name' => 'youtube_videos.xlsx'
+    ],
 ];
 
 return $config;

@@ -73,4 +73,14 @@ class ConfigService implements ConfigServiceInterface
 
         return str_replace('{videoId}', $videoId, $url);
     }
+
+    /**
+     * @return string
+     */
+    public function getExcelFile(): string
+    {
+        return BASE_DIR
+            . '/' . $this->config['excel_file']['directory']
+            . '/' . $this->config['excel_file']['name'];
+    }
 }

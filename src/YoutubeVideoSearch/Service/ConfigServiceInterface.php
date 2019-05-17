@@ -26,4 +26,9 @@ interface ConfigServiceInterface
      * @return string
      */
     public function getYouTubeVideoUrl(string $videoIds): string;
+
+    /**
+     * @return string
+     */
+    public function getExcelFile(): string;
 }

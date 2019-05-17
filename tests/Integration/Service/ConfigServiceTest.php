@@ -72,4 +72,14 @@ class ConfigServiceTest extends TestCase
 
         $this->assertSame($expectedApiUrl, $videoUrl);
     }
+
+    public function testGetExcelFile(): void
+    {
+        $excelFile = $this->configService->getExcelFile();
+        $expectedExcelFile = BASE_DIR
+            . '/' . $this->config['excel_file']['directory']
+            . '/' . $this->config['excel_file']['name'];
+
+        $this->assertSame($expectedExcelFile, $excelFile);
+    }
 }
