@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Tests\Unit\Service;
+namespace Tests\Unit\Validator;
 
 use PHPUnit\Framework\TestCase;
 use YoutubeVideoSearch\Validator\SearchKeywordValidator;

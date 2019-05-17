@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Tests\Unit\Service;
+namespace Tests\Integration\Service;
 
 use PHPUnit\Framework\TestCase;
 use YoutubeVideoSearch\Container\ContainerFactory;
