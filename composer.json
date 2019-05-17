@@ -7,6 +7,16 @@
             "email": "live.iqbal@gmail.com"
         }
     ],
+    "autoload": {
+        "psr-4": {
+            "YoutubeVideoSearch\\": "src/YoutubeVideoSearch/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
     "require": {
         "php": "^7.2"
     },
