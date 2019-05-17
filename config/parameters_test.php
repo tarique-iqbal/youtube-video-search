@@ -4,6 +4,7 @@ $config = [
     'google_api' => [
         'youtube_data_api_key' => 'dummyKey',
         'youtube_max_results' => 50,
+        'youtube_video_url' => 'dummyUrl?v={videoId}',
         'youtube_video_snippet_api_url' => 'dummyApiUrl?'
             . 'part=snippet'
             . '&type=video'

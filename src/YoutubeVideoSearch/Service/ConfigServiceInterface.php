@@ -20,4 +20,10 @@ interface ConfigServiceInterface
      * @return string
      */
     public function getYouTubeVideoStatisticsApiUrl(string $videoIds): string;
+
+    /**
+     * @param string $videoIds
+     * @return string
+     */
+    public function getYouTubeVideoUrl(string $videoIds): string;
 }

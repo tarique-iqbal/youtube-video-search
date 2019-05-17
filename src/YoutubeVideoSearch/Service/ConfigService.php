@@ -62,4 +62,15 @@ class ConfigService implements ConfigServiceInterface
 
         return str_replace(['{id}', '{key}'], [$videoIds, $key], $apiUrl);
     }
+
+    /**
+     * @param string $videoId
+     * @return string
+     */
+    public function getYouTubeVideoUrl(string $videoId): string
+    {
+        $url = $this->config['google_api']['youtube_video_url'];
+
+        return str_replace('{videoId}', $videoId, $url);
+    }
 }

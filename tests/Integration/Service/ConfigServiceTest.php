@@ -60,4 +60,16 @@ class ConfigServiceTest extends TestCase
 
         $this->assertSame($expectedApiUrl, $apiUrl);
     }
+
+    public function testGetYouTubeVideoUrl(): void
+    {
+        $videoId = 'ROtTk71qN7Y';
+        $videoUrl = $this->configService->getYouTubeVideoUrl($videoId);
+
+        $url = $this->config['google_api']['youtube_video_url'];
+
+        $expectedApiUrl = str_replace('{videoId}', $videoId, $url);
+
+        $this->assertSame($expectedApiUrl, $videoUrl);
+    }
 }

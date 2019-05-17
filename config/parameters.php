@@ -4,6 +4,7 @@ $config = [
     'google_api' => [
         'youtube_data_api_key' => 'REPLACE-ME',
         'youtube_max_results' => 50,
+        'youtube_video_url' => 'https://www.youtube.com/watch?v={videoId}',
         'youtube_video_snippet_api_url' => 'https://www.googleapis.com/youtube/v3/search?'
             . 'part=snippet'
             . '&type=video'
