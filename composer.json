@@ -1,0 +1,12 @@
+{
+    "name": "employer/youtube-video-search",
+    "description": "YouTube video search by keyword and the result would be written in an excel file.",
+    "authors": [
+        {
+            "name": "Tarique Iqbal",
+            "email": "live.iqbal@gmail.com"
+        }
+    ],
+    "require": {},
+    "minimum-stability": "dev"
+}
