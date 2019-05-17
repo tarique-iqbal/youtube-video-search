@@ -7,6 +7,7 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use PHPUnit\Framework\TestCase;
 use Pimple\Container;
 use YoutubeVideoSearch\Container\ContainerFactory;
+use YoutubeVideoSearch\Exception\ExceptionHandler;
 use YoutubeVideoSearch\Service\CliArgsService;
 use YoutubeVideoSearch\Service\ConfigService;
 use YoutubeVideoSearch\Service\CurlService;
@@ -33,5 +34,6 @@ class ContainerFactoryTest extends TestCase
         $this->assertInstanceOf(ExcelFileWriterService::class, $container['ExcelFileWriterService']);
         $this->assertInstanceOf(CliArgsService::class, $container['CliArgsService']);
         $this->assertInstanceOf(YoutubeVideoSearchApplication::class, $container['YoutubeVideoSearchApplication']);
+        $this->assertInstanceOf(ExceptionHandler::class, $container['ExceptionHandler']);
     }
 }

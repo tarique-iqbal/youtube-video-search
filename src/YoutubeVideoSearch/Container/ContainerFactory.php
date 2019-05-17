@@ -5,6 +5,7 @@ namespace YoutubeVideoSearch\Container;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use Pimple\Container;
+use YoutubeVideoSearch\Exception\ExceptionHandler;
 use YoutubeVideoSearch\Service\CliArgsService;
 use YoutubeVideoSearch\Service\ConfigService;
 use YoutubeVideoSearch\Service\CurlService;
@@ -42,6 +43,12 @@ class ContainerFactory
 
         $container['ConfigService'] = function () {
             return new ConfigService($this->config);
+        };
+
+        $container['ExceptionHandler'] = function ($c) {
+            return new ExceptionHandler(
+                $c['ConfigService']
+            );
         };
 
         $container['CurlService'] = function () {
