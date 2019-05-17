@@ -29,6 +29,10 @@ $config = [
         'directory' => 'var/data',
         'name' => 'youtube_videos.xlsx'
     ],
+    'error_log' => [
+        'directory' => 'var/logs',
+        'file_name' => 'errors.log'
+    ],
 ];
 
 return $config;

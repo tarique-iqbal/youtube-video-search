@@ -83,4 +83,14 @@ class ConfigService implements ConfigServiceInterface
             . '/' . $this->config['excel_file']['directory']
             . '/' . $this->config['excel_file']['name'];
     }
+
+    /**
+     * @return string
+     */
+    public function getErrorLogFile(): string
+    {
+        return BASE_DIR
+            . '/' . $this->config['error_log']['directory']
+            . '/' . $this->config['error_log']['file_name'];
+    }
 }

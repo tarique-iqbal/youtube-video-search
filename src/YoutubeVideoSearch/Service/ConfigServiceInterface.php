@@ -31,4 +31,9 @@ interface ConfigServiceInterface
      * @return string
      */
     public function getExcelFile(): string;
+
+    /**
+     * @return string
+     */
+    public function getErrorLogFile(): string;
 }

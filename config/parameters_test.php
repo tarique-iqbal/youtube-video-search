@@ -29,6 +29,10 @@ $config = [
         'directory' => 'var/data',
         'name' => 'test_videos.xlsx'
     ],
+    'error_log' => [
+        'directory' => 'var/logs',
+        'file_name' => 'test_errors.log'
+    ],
 ];
 
 return $config;
