@@ -1,3 +1,7 @@
 /.DS_Store
 /.idea
+/var/*
+!/var/data
+/var/data/*
+!var/data/.gitkeep
 /vendor/
