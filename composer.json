@@ -21,6 +21,7 @@
         "php": "^7.2",
         "ext-curl": "*",
         "ext-json": "*",
+        "phpoffice/phpspreadsheet": "^1.6",
         "pimple/pimple": "^3.0"
     },
     "require-dev": {
