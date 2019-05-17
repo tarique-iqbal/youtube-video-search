@@ -1,0 +1,21 @@
+<?php declare(strict_types = 1);
+
+namespace YoutubeVideoSearch\Service;
+
+use PhpOffice\PhpSpreadsheet\Exception;
+use PhpOffice\PhpSpreadsheet\Writer\Exception as WriterException;
+
+/**
+ * Interface FileWriterServiceInterface
+ * @package YoutubeVideoSearch\Service
+ */
+interface FileWriterServiceInterface
+{
+    /**
+     * @param string $fileName
+     * @param array $youtubeVideos
+     * @throws Exception
+     * @throws WriterException
+     */
+    public function write(string $fileName, array $youtubeVideos): void;
+}

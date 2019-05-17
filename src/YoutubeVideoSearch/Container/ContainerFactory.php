@@ -2,9 +2,12 @@
 
 namespace YoutubeVideoSearch\Container;
 
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use Pimple\Container;
 use YoutubeVideoSearch\Service\ConfigService;
 use YoutubeVideoSearch\Service\CurlService;
+use YoutubeVideoSearch\Service\ExcelFileWriterService;
 use YoutubeVideoSearch\Service\YoutubeDataService;
 use YoutubeVideoSearch\Service\YoutubeVideoService;
 
@@ -54,6 +57,23 @@ class ContainerFactory
             return new YoutubeVideoService(
                 $c['ConfigService'],
                 $c['YoutubeDataService']
+            );
+        };
+
+        $container['Spreadsheet'] = function () {
+            return new Spreadsheet();
+        };
+
+        $container['Xlsx'] = function ($c) {
+            return new Xlsx(
+                $c['Spreadsheet']
+            );
+        };
+
+        $container['ExcelFileWriterService'] = function ($c) {
+            return new ExcelFileWriterService(
+                $c['Spreadsheet'],
+                $c['Xlsx']
             );
         };
 
