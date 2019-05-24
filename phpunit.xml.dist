@@ -9,7 +9,7 @@
          verbose="true">
 
     <testsuites>
-        <testsuite name="PHP Coding Challenge: Language Group">
+        <testsuite name="PHP Coding Challenge: YouTube Video Search">
             <directory suffix="Test.php">tests</directory>
         </testsuite>
     </testsuites>
