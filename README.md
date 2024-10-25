@@ -1,11 +1,11 @@
 # YouTube Video Search
-A small command-line utility that will search YouTube videos by keyword and the result would be written in an excel file.
+A small command-line utility that will search YouTube videos by keyword and the result would be written in an Excel file.
 
 ## Prerequisites
 
 ```
 composer
-php (>=7.2)
+php (>=8.2)
 ```
 
 ## Note
@@ -47,7 +47,7 @@ $ php index.php 'Search keyword'
 
 ## Running the tests
 
-- Follow the Install instructions.
+- Follow the Installation instructions.
 
 Adapt `phpunit.xml.dist` PHP Constant according to your setup environment.
 
