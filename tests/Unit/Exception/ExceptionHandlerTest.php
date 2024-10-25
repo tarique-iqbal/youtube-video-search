@@ -2,7 +2,7 @@
 
 namespace Tests\Unit\Exception;
 
-use org\bovigo\vfs\vfsStream;
+use bovigo\vfs\vfsStream;
 use PHPUnit\Framework\TestCase;
 use YoutubeVideoSearch\Exception\ExceptionHandler;
 use YoutubeVideoSearch\Service\ConfigServiceInterface;
@@ -11,12 +11,12 @@ class ExceptionHandlerTest extends TestCase
 {
     public function testReport(): void
     {
-        $this->setOutputCallback(function () {
-        });
+        $this->expectOutputString(
+            sprintf('Exception occurred! Please check errors log file.%s', PHP_EOL)
+        );
 
         $structure = [
             'logs' => [
-
             ]
         ];
         $root = vfsStream::setup(sys_get_temp_dir(), null, $structure);
@@ -33,7 +33,7 @@ class ExceptionHandlerTest extends TestCase
         (new ExceptionHandler($configService))->report(new \Exception($message));
 
         $this->assertTrue($root->hasChild('logs/errors.log'));
-        $this->assertContains(
+        $this->assertStringContainsString(
             $message,
             $root->getChild('logs/errors.log')->getContent()
         );

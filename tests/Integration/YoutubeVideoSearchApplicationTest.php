@@ -1,23 +1,25 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace Tests\Integration;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use YoutubeVideoSearch\Container\ContainerFactory;
 use YoutubeVideoSearch\Service\CliArgsServiceInterface;
 use YoutubeVideoSearch\Service\CurlServiceInterface;
+use YoutubeVideoSearch\YoutubeVideoSearchApplication;
 
 class YoutubeVideoSearchApplicationTest extends TestCase
 {
-    protected $fileName;
+    protected string $fileName;
 
-    protected $curlService;
+    protected CurlServiceInterface $curlService;
 
-    protected $cliArgsService;
+    protected CliArgsServiceInterface $cliArgsService;
 
-    protected $youtubeVideoSearchApplication;
+    protected YoutubeVideoSearchApplication $youtubeVideoSearchApplication;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $config = include BASE_DIR . '/config/parameters_test.php';
         $container = (new ContainerFactory($config))->create();
@@ -35,7 +37,7 @@ class YoutubeVideoSearchApplicationTest extends TestCase
         $this->youtubeVideoSearchApplication = $container['YoutubeVideoSearchApplication'];
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         if (file_exists($this->fileName)) {
             unlink($this->fileName);
@@ -44,8 +46,9 @@ class YoutubeVideoSearchApplicationTest extends TestCase
 
     public function testSearch(): void
     {
-        $this->setOutputCallback(function () {
-        });
+        $this->expectOutputString(
+            sprintf('YouTube videos search and excel file has been written successfully.%s', PHP_EOL)
+        );
 
         $this->cliArgsService
             ->method('getArgs')
@@ -53,7 +56,7 @@ class YoutubeVideoSearchApplicationTest extends TestCase
         $this->curlService
             ->expects($this->any())
             ->method('get')
-            ->will($this->onConsecutiveCalls(
+            ->willReturn(
                 '{"kind": "youtube#searchListResponse","regionCode":"DE","pageInfo":{"totalResults":100,'
                 . '"resultsPerPage":2},"items":[{"kind": "youtube#searchResult","id":{"kind": "youtube#video",'
                 . '"videoId": "sru9dtw9q08"},"snippet":{"title": "Spring Breakdown Part 3: “Tropical Depression”'
@@ -67,14 +70,14 @@ class YoutubeVideoSearchApplicationTest extends TestCase
                 . ' "2336","dislikeCount": "70","favoriteCount": "0"}},{"kind": "youtube#video","id": "ROtTk71qN7Y",'
                 . '"statistics": {"viewCount": "4570165","likeCount": "28426","dislikeCount": "2096","favoriteCount":'
                 . ' "0","commentCount": "3552"}}]}'
-            ));
+            );
 
         $this->youtubeVideoSearchApplication->search();
 
         $this->assertTrue(file_exists($this->fileName));
     }
 
-    public function addInvalidInputProvider()
+    public static function addInvalidInputProvider(): array
     {
         return [
             [
@@ -96,9 +99,7 @@ class YoutubeVideoSearchApplicationTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider addInvalidInputProvider
-     */
+    #[DataProvider('addInvalidInputProvider')]
     public function testSearchWithInvalidInput(array $invalidInputArgs, string $expectOutputString): void
     {
         $this->cliArgsService

@@ -5,14 +5,15 @@ namespace Tests\Integration\Service;
 use PHPUnit\Framework\TestCase;
 use YoutubeVideoSearch\Container\ContainerFactory;
 use YoutubeVideoSearch\Entity\YoutubeVideo;
+use YoutubeVideoSearch\Service\FileWriterServiceInterface;
 
 class ExcelFileWriterServiceTest extends TestCase
 {
-    protected $fileName;
+    protected string $fileName;
 
-    protected $excelFileWriterService;
+    protected FileWriterServiceInterface $excelFileWriterService;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->fileName = BASE_DIR . '/var/data/test.xlsx';
 
@@ -22,7 +23,7 @@ class ExcelFileWriterServiceTest extends TestCase
         $this->excelFileWriterService = $container['ExcelFileWriterService'];
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         if (file_exists($this->fileName)) {
             unlink($this->fileName);

@@ -2,12 +2,13 @@
 
 namespace Tests\Unit\Validator;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use YoutubeVideoSearch\Validator\ArraySizeValidator;
 
 class ArraySizeValidatorTest extends TestCase
 {
-    public function addArraySizeDataProvider()
+    public static function addArraySizeDataProvider(): array
     {
         return [
             [
@@ -28,9 +29,7 @@ class ArraySizeValidatorTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider addArraySizeDataProvider
-     */
+    #[DataProvider('addArraySizeDataProvider')]
     public function testIsValid(array $array, int $expectedInputSize, bool $expectedStatus): void
     {
         $arraySizeValidator = new ArraySizeValidator();

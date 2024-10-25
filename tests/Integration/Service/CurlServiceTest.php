@@ -7,9 +7,9 @@ use YoutubeVideoSearch\Service\CurlService;
 
 class CurlServiceTest extends TestCase
 {
-    protected $headers = [];
+    protected array $headers;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->headers = [
             'Content-Type: text/html; charset=utf-8'

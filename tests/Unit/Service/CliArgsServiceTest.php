@@ -2,6 +2,7 @@
 
 namespace Tests\Unit\Service;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use YoutubeVideoSearch\Service\CliArgsService;
 use PHPUnit\Framework\TestCase;
 
@@ -9,7 +10,7 @@ class CliArgsServiceTest extends TestCase
 {
     const FILE = 'index.php';
 
-    public function addCliArgsDataProvider()
+    public static function addCliArgsDataProvider(): array
     {
         return [
             [
@@ -24,9 +25,7 @@ class CliArgsServiceTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider addCliArgsDataProvider
-     */
+    #[DataProvider('addCliArgsDataProvider')]
     public function testGetArgs(array $arguments, int $countExpected, array $resultExpected): void
     {
         $_SERVER['argv'] = $arguments;

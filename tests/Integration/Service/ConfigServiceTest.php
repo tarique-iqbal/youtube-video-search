@@ -4,14 +4,15 @@ namespace Tests\Integration\Service;
 
 use PHPUnit\Framework\TestCase;
 use YoutubeVideoSearch\Service\ConfigService;
+use YoutubeVideoSearch\Service\ConfigServiceInterface;
 
 class ConfigServiceTest extends TestCase
 {
-    protected $config;
+    protected array $config;
 
-    protected $configService;
+    protected ConfigServiceInterface $configService;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->config = include BASE_DIR . '/config/parameters.php';
         $this->configService = new ConfigService($this->config);

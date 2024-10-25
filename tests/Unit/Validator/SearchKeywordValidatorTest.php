@@ -2,12 +2,13 @@
 
 namespace Tests\Unit\Validator;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use YoutubeVideoSearch\Validator\SearchKeywordValidator;
 
 class SearchKeywordValidatorTest extends TestCase
 {
-    public function addSearchKeywordDataProvider()
+    public static function addSearchKeywordDataProvider(): array
     {
         return [
             [
@@ -25,9 +26,7 @@ class SearchKeywordValidatorTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider addSearchKeywordDataProvider
-     */
+    #[DataProvider('addSearchKeywordDataProvider')]
     public function testIsValid(string $keyword, bool $expectedStatus): void
     {
         $searchKeywordValidator = new SearchKeywordValidator();

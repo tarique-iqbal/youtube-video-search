@@ -2,17 +2,18 @@
 
 namespace Tests\Integration\Service;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use YoutubeVideoSearch\Container\ContainerFactory;
 use YoutubeVideoSearch\Service\CurlServiceInterface;
 
 class YoutubeDataServiceTest extends TestCase
 {
-    protected $curlService;
+    protected CurlServiceInterface $curlService;
 
     protected $youtubeDataService;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $config = include BASE_DIR . '/config/parameters_test.php';
         $container = (new ContainerFactory($config))->create();
@@ -45,7 +46,7 @@ class YoutubeDataServiceTest extends TestCase
         $this->assertContainsOnlyInstancesOf(\stdClass::class, $snippet->items);
     }
 
-    public function addUnexpectedResponseProvider()
+    public static function addUnexpectedResponseProvider(): array
     {
         return [
             [
@@ -55,9 +56,7 @@ class YoutubeDataServiceTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider addUnexpectedResponseProvider
-     */
+    #[DataProvider('addUnexpectedResponseProvider')]
     public function testSearchVideoSnippetInvalidResponseFromCurlService(string $response): void
     {
         $this->expectException(\UnexpectedValueException::class);
@@ -89,9 +88,7 @@ class YoutubeDataServiceTest extends TestCase
         $this->assertContainsOnlyInstancesOf(\stdClass::class, $statistics->items);
     }
 
-    /**
-     * @dataProvider addUnexpectedResponseProvider
-     */
+    #[DataProvider('addUnexpectedResponseProvider')]
     public function testSearchVideoStatisticsInvalidResponseFromCurlService(string $response): void
     {
         $this->expectException(\UnexpectedValueException::class);

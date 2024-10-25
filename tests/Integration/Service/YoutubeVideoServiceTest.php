@@ -6,14 +6,15 @@ use PHPUnit\Framework\TestCase;
 use YoutubeVideoSearch\Container\ContainerFactory;
 use YoutubeVideoSearch\Entity\YoutubeVideo;
 use YoutubeVideoSearch\Service\CurlServiceInterface;
+use YoutubeVideoSearch\Service\YoutubeVideoServiceInterface;
 
 class YoutubeVideoServiceTest extends TestCase
 {
-    protected $curlService;
+    protected CurlServiceInterface $curlService;
 
-    protected $youtubeVideoService;
+    protected YoutubeVideoServiceInterface $youtubeVideoService;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $config = include BASE_DIR . '/config/parameters_test.php';
         $container = (new ContainerFactory($config))->create();
@@ -30,7 +31,7 @@ class YoutubeVideoServiceTest extends TestCase
         $this->curlService
             ->expects($this->any())
             ->method('get')
-            ->will($this->onConsecutiveCalls(
+            ->willReturn(
                 '{"kind": "youtube#searchListResponse","regionCode":"DE","pageInfo":{"totalResults":100,'
                 . '"resultsPerPage":2},"items":[{"kind": "youtube#searchResult","id":{"kind": "youtube#video",'
                 . '"videoId": "sru9dtw9q08"},"snippet":{"title": "Spring Breakdown Part 3: “Tropical Depression”'
@@ -44,7 +45,7 @@ class YoutubeVideoServiceTest extends TestCase
                 . ' "2336","dislikeCount": "70","favoriteCount": "0"}},{"kind": "youtube#video","id": "ROtTk71qN7Y",'
                 . '"statistics": {"viewCount": "4570165","likeCount": "28426","dislikeCount": "2096","favoriteCount":'
                 . ' "0","commentCount": "3552"}}]}'
-            ));
+            );
 
         $keyword = 'MLP:';
         $youtubeVideos = $this->youtubeVideoService->searchAndSortByViewCountDescending($keyword);
@@ -57,7 +58,7 @@ class YoutubeVideoServiceTest extends TestCase
         $this->curlService
             ->expects($this->any())
             ->method('get')
-            ->will($this->onConsecutiveCalls(
+            ->willReturn(
                 '{"nextPageToken": "CAIQAA","regionCode": "DE","pageInfo": {"totalResults": 1000000,'
                 . '"resultsPerPage": 2},"items": [{"id": {"kind": "youtube#video","videoId": "sYilwmF8JSA"},'
                 . '"snippet": {"title": "Spring Breakdown Part 4: “Friend Overboard” MLP: Equestria Girls Season 2",'
@@ -83,7 +84,7 @@ class YoutubeVideoServiceTest extends TestCase
                 . ' {"viewCount": "664825","likeCount": "4902","dislikeCount": "339","favoriteCount": "0"}},{"id":'
                 . ' "sru9dtw9q08","statistics": {"viewCount": "282652","likeCount": "2896","dislikeCount": "115",'
                 . '"favoriteCount": "0"}}]}'
-            ));
+            );
 
         $keyword = 'MLP';
         $youtubeVideos = $this->youtubeVideoService->searchAndSortByViewCountDescending($keyword);
