@@ -1,24 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit bootstrap="vendor/autoload.php"
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         bootstrap="vendor/autoload.php"
          backupGlobals="false"
          colors="true"
          stopOnError="false"
          stopOnFailure="false"
          stopOnIncomplete="false"
          stopOnSkipped="false"
-         verbose="true">
+         cacheResult="false"
+         testdox="false"
+         displayDetailsOnIncompleteTests="true"
+         displayDetailsOnSkippedTests="true"
+         displayDetailsOnTestsThatTriggerDeprecations="true"
+         displayDetailsOnTestsThatTriggerErrors="true"
+         displayDetailsOnTestsThatTriggerNotices="true"
+         displayDetailsOnTestsThatTriggerWarnings="true"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/11.2/phpunit.xsd"
+         cacheDirectory=".phpunit.cache">
 
     <testsuites>
         <testsuite name="PHP Coding Challenge: YouTube Video Search">
             <directory suffix="Test.php">tests</directory>
         </testsuite>
     </testsuites>
-
-    <filter>
-        <whitelist addUncoveredFilesFromWhitelist="true">
-            <directory suffix=".php">src</directory>
-        </whitelist>
-    </filter>
 
     <php>
         <server name="REQUEST_SCHEME" value="https"/>
