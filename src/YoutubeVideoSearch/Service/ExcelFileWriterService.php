@@ -8,13 +8,9 @@ use PhpOffice\PhpSpreadsheet\Style\Fill;
 use PhpOffice\PhpSpreadsheet\Writer\Exception as WriterException;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
-/**
- * Class ExcelFileWriterService
- * @package YoutubeVideoSearch\Service
- */
-class ExcelFileWriterService implements FileWriterServiceInterface
+final readonly class ExcelFileWriterService implements FileWriterServiceInterface
 {
-    const EXCEL_HEADER = [
+    private const EXCEL_HEADER = [
         'Video title',
         'Number of views',
         'Number of likes',
@@ -22,30 +18,13 @@ class ExcelFileWriterService implements FileWriterServiceInterface
         'Video link'
     ];
 
-    /**
-     * @var Spreadsheet
-     */
-    private Spreadsheet $spreadsheet;
-
-    /**
-     * @var Xlsx
-     */
-    private Xlsx $xlsx;
-
-    /**
-     * ExcelFileWriterService constructor.
-     * @param Spreadsheet $spreadsheet
-     * @param Xlsx $xlsx
-     */
-    public function __construct(Spreadsheet $spreadsheet, Xlsx $xlsx)
-    {
-        $this->spreadsheet = $spreadsheet;
-        $this->xlsx = $xlsx;
+    public function __construct(
+        private Spreadsheet $spreadsheet,
+        private Xlsx $xlsx
+    ) {
     }
 
     /**
-     * @param string $fileName
-     * @param array $youtubeVideos
      * @throws Exception
      * @throws WriterException
      */

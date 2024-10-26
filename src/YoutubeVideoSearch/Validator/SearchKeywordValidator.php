@@ -2,21 +2,10 @@
 
 namespace YoutubeVideoSearch\Validator;
 
-/**
- * Class SearchKeyWorkValidator
- * @package YoutubeVideoSearch\Validator
- */
 class SearchKeywordValidator
 {
-    /**
-     * @var string
-     */
     private string $errorMessage;
 
-    /**
-     * @param string $keyword
-     * @return bool
-     */
     public function isValid(string $keyword): bool
     {
         if ($keyword === '') {
@@ -34,9 +23,6 @@ class SearchKeywordValidator
         return true;
     }
 
-    /**
-     * @return string
-     */
     public function getErrorMessage(): string
     {
         return $this->errorMessage;

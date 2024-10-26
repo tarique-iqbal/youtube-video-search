@@ -2,22 +2,10 @@
 
 namespace YoutubeVideoSearch\Service;
 
-/**
- * Class YoutubeDataService
- * @package YoutubeVideoSearch\Service
- */
 final class YoutubeDataService implements YoutubeDataServiceInterface
 {
-    /**
-     * @var array
-     */
     private array $headers;
 
-    /**
-     * RestCountriesService constructor.
-     * @param ConfigServiceInterface $configService
-     * @param CurlServiceInterface $curlService
-     */
     public function __construct(
         private readonly ConfigServiceInterface $configService,
         private readonly CurlServiceInterface $curlService
@@ -28,9 +16,6 @@ final class YoutubeDataService implements YoutubeDataServiceInterface
     }
 
     /**
-     * @param string $keyword
-     * @param string|null $nextPageToken
-     * @return \stdClass
      * @throws \UnexpectedValueException
      */
     public function searchVideoSnippet(string $keyword, ?string $nextPageToken): \stdClass
@@ -52,8 +37,6 @@ final class YoutubeDataService implements YoutubeDataServiceInterface
     }
 
     /**
-     * @param string $videoIds
-     * @return \stdClass
      * @throws \UnexpectedValueException
      */
     public function searchVideoStatistics(string $videoIds): \stdClass

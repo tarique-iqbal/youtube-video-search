@@ -11,21 +11,10 @@ use YoutubeVideoSearch\Service\YoutubeVideoServiceInterface;
 use YoutubeVideoSearch\Validator\ArraySizeValidator;
 use YoutubeVideoSearch\Validator\SearchKeywordValidator;
 
-/**
- * Class YoutubeVideoApplication
- * @package YoutubeVideoSearch
- */
 final readonly class YoutubeVideoSearchApplication
 {
     private const INPUT_SIZE = 1;
 
-    /**
-     * YoutubeVideoApplication constructor.
-     * @param CliArgsServiceInterface $cliArgsService
-     * @param ConfigServiceInterface $configService
-     * @param YoutubeVideoServiceInterface $youtubeVideoService
-     * @param FileWriterServiceInterface $excelFileWriterService
-     */
     public function __construct(
         private CliArgsServiceInterface $cliArgsService,
         private ConfigServiceInterface $configService,
@@ -58,10 +47,6 @@ final readonly class YoutubeVideoSearchApplication
         }
     }
 
-    /**
-     * @param array $inputArgs
-     * @return bool
-     */
     private function validateInput(array $inputArgs): bool
     {
         $arraySizeValidator = new ArraySizeValidator();

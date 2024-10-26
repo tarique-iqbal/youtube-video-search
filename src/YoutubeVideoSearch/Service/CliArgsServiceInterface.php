@@ -2,14 +2,7 @@
 
 namespace YoutubeVideoSearch\Service;
 
-/**
- * Interface CliArgsServiceInterface
- * @package YoutubeVideoSearch\Service
- */
 interface CliArgsServiceInterface
 {
-    /**
-     * @return array
-     */
     public function getArgs(): array;
 }

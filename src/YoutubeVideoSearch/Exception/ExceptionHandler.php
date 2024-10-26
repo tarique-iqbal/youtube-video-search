@@ -4,16 +4,8 @@ namespace YoutubeVideoSearch\Exception;
 
 use YoutubeVideoSearch\Service\ConfigServiceInterface;
 
-/**
- * Class ExceptionHandler
- * @package YoutubeVideoSearch\Exception
- */
 final readonly class ExceptionHandler
 {
-    /**
-     * ExceptionHandler constructor.
-     * @param ConfigServiceInterface $configService
-     */
     public function __construct(private ConfigServiceInterface $configService)
     {
     }

@@ -2,20 +2,10 @@
 
 namespace YoutubeVideoSearch\Service;
 
-/**
- * Class CurlService
- * @package YoutubeVideoSearch\Service
- */
 class CurlService implements CurlServiceInterface
 {
-    /**
-     * @var \CurlHandle|false
-     */
     private \CurlHandle|false $ch;
 
-    /**
-     * @param array $headers
-     */
     private function init(array $headers): void
     {
         $this->ch = curl_init();
@@ -28,12 +18,6 @@ class CurlService implements CurlServiceInterface
         curl_setopt($this->ch, CURLOPT_HTTPHEADER, $headers);
     }
 
-    /**
-     * @param string $url
-     * @param array $headers
-     * @return string
-     * @throws \UnexpectedValueException
-     */
     public function get(string $url, array $headers): string
     {
         $this->init($headers);

@@ -14,23 +14,12 @@ use YoutubeVideoSearch\Service\YoutubeDataService;
 use YoutubeVideoSearch\Service\YoutubeVideoService;
 use YoutubeVideoSearch\YoutubeVideoSearchApplication;
 
-/**
- * Class ContainerFactory
- * @package YoutubeVideoSearch\Container
- */
 final readonly class ContainerFactory
 {
-    /**
-     * ContainerFactory constructor.
-     * @param array $config
-     */
     public function __construct(private array $config)
     {
     }
 
-    /**
-     * @return Container
-     */
     public function create(): Container
     {
         $container = new Container();

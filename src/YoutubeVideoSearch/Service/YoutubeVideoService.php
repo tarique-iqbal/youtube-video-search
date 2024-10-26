@@ -4,10 +4,6 @@ namespace YoutubeVideoSearch\Service;
 
 use YoutubeVideoSearch\Entity\YoutubeVideo;
 
-/**
- * Class YoutubeVideoService
- * @package YoutubeVideoSearch\Service
- */
 final readonly class YoutubeVideoService implements YoutubeVideoServiceInterface
 {
     public function __construct(
@@ -16,10 +12,6 @@ final readonly class YoutubeVideoService implements YoutubeVideoServiceInterface
     ) {
     }
 
-    /**
-     * @param string $keyword
-     * @return array
-     */
     public function searchAndSortByViewCountDescending(string $keyword): array
     {
         $youtubeVideos = [];

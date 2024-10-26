@@ -2,15 +2,8 @@
 
 namespace YoutubeVideoSearch\Service;
 
-/**
- * Class CliArgsService
- * @package YoutubeVideoSearch\Service
- */
 class CliArgsService implements CliArgsServiceInterface
 {
-    /**
-     * @return array
-     */
     public function getArgs(): array
     {
         $argv = $_SERVER['argv'];
