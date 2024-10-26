@@ -11,7 +11,7 @@ class SearchKeywordValidator
     /**
      * @var string
      */
-    private $errorMessage;
+    private string $errorMessage;
 
     /**
      * @param string $keyword

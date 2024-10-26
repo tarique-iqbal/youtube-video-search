@@ -6,36 +6,25 @@ namespace YoutubeVideoSearch\Service;
  * Class YoutubeDataService
  * @package YoutubeVideoSearch\Service
  */
-class YoutubeDataService implements YoutubeDataServiceInterface
+final class YoutubeDataService implements YoutubeDataServiceInterface
 {
     /**
      * @var array
      */
-    private $headers;
-
-    /**
-     * @var ConfigServiceInterface
-     */
-    private $configService;
-
-    /**
-     * @var CurlServiceInterface
-     */
-    private $curlService;
+    private array $headers;
 
     /**
      * RestCountriesService constructor.
      * @param ConfigServiceInterface $configService
      * @param CurlServiceInterface $curlService
      */
-    public function __construct(ConfigServiceInterface $configService, CurlServiceInterface $curlService)
-    {
+    public function __construct(
+        private readonly ConfigServiceInterface $configService,
+        private readonly CurlServiceInterface $curlService
+    ) {
         $this->headers = [
             'Content-Type: application/json; charset=utf-8'
         ];
-
-        $this->configService = $configService;
-        $this->curlService = $curlService;
     }
 
     /**

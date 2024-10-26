@@ -9,9 +9,9 @@ namespace YoutubeVideoSearch\Service;
 class CurlService implements CurlServiceInterface
 {
     /**
-     * @var false|resource
+     * @var \CurlHandle|false
      */
-    private $ch;
+    private \CurlHandle|false $ch;
 
     /**
      * @param array $headers

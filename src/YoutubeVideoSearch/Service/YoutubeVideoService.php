@@ -8,22 +8,12 @@ use YoutubeVideoSearch\Entity\YoutubeVideo;
  * Class YoutubeVideoService
  * @package YoutubeVideoSearch\Service
  */
-class YoutubeVideoService implements YoutubeVideoServiceInterface
+final readonly class YoutubeVideoService implements YoutubeVideoServiceInterface
 {
-    /**
-     * @var ConfigServiceInterface
-     */
-    private $configService;
-
-    /**
-     * @var YoutubeDataServiceInterface
-     */
-    private $youtubeDataService;
-
-    public function __construct(ConfigServiceInterface $configService, YoutubeDataServiceInterface $youtubeDataService)
-    {
-        $this->configService = $configService;
-        $this->youtubeDataService = $youtubeDataService;
+    public function __construct(
+        private ConfigServiceInterface $configService,
+        private YoutubeDataServiceInterface $youtubeDataService
+    ) {
     }
 
     /**
@@ -70,7 +60,7 @@ class YoutubeVideoService implements YoutubeVideoServiceInterface
         }
 
         usort($youtubeVideos, function ($youTubeVideo, $youTubeVideoToCompare) {
-            return $youTubeVideo->getViewCount() < $youTubeVideoToCompare->getViewCount();
+            return $youTubeVideo->getViewCount() < $youTubeVideoToCompare->getViewCount() ? 1 : 0;
         });
 
         return $youtubeVideos;

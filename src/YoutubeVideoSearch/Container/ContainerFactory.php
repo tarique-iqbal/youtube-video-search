@@ -18,20 +18,14 @@ use YoutubeVideoSearch\YoutubeVideoSearchApplication;
  * Class ContainerFactory
  * @package YoutubeVideoSearch\Container
  */
-class ContainerFactory
+final readonly class ContainerFactory
 {
-    /**
-     * @var array
-     */
-    private $config;
-
     /**
      * ContainerFactory constructor.
      * @param array $config
      */
-    public function __construct(array $config)
+    public function __construct(private array $config)
     {
-        $this->config = $config;
     }
 
     /**
@@ -45,7 +39,7 @@ class ContainerFactory
             return new ConfigService($this->config);
         };
 
-        $container['ExceptionHandler'] = function ($c) {
+        $container['ExceptionHandler'] = function (Container $c) {
             return new ExceptionHandler(
                 $c['ConfigService']
             );
@@ -55,14 +49,14 @@ class ContainerFactory
             return new CurlService();
         };
 
-        $container['YoutubeDataService'] = function ($c) {
+        $container['YoutubeDataService'] = function (Container $c) {
             return new YoutubeDataService(
                 $c['ConfigService'],
                 $c['CurlService']
             );
         };
 
-        $container['YoutubeVideoService'] = function ($c) {
+        $container['YoutubeVideoService'] = function (Container $c) {
             return new YoutubeVideoService(
                 $c['ConfigService'],
                 $c['YoutubeDataService']
@@ -79,7 +73,7 @@ class ContainerFactory
             );
         };
 
-        $container['ExcelFileWriterService'] = function ($c) {
+        $container['ExcelFileWriterService'] = function (Container $c) {
             return new ExcelFileWriterService(
                 $c['Spreadsheet'],
                 $c['Xlsx']
@@ -90,7 +84,7 @@ class ContainerFactory
             return new CliArgsService();
         };
 
-        $container['YoutubeVideoSearchApplication'] = function ($c) {
+        $container['YoutubeVideoSearchApplication'] = function (Container $c) {
             return new YoutubeVideoSearchApplication(
                 $c['CliArgsService'],
                 $c['ConfigService'],

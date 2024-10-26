@@ -15,29 +15,9 @@ use YoutubeVideoSearch\Validator\SearchKeywordValidator;
  * Class YoutubeVideoApplication
  * @package YoutubeVideoSearch
  */
-class YoutubeVideoSearchApplication
+final readonly class YoutubeVideoSearchApplication
 {
-    const INPUT_SIZE = 1;
-
-    /**
-     * @var CliArgsServiceInterface
-     */
-    private $cliArgsService;
-
-    /**
-     * @var ConfigServiceInterface
-     */
-    private $configService;
-
-    /**
-     * @var YoutubeVideoServiceInterface
-     */
-    private $youtubeVideoService;
-
-    /**
-     * @var FileWriterServiceInterface
-     */
-    private $excelFileWriterService;
+    private const INPUT_SIZE = 1;
 
     /**
      * YoutubeVideoApplication constructor.
@@ -47,15 +27,11 @@ class YoutubeVideoSearchApplication
      * @param FileWriterServiceInterface $excelFileWriterService
      */
     public function __construct(
-        CliArgsServiceInterface $cliArgsService,
-        ConfigServiceInterface $configService,
-        YoutubeVideoServiceInterface $youtubeVideoService,
-        FileWriterServiceInterface $excelFileWriterService
+        private CliArgsServiceInterface $cliArgsService,
+        private ConfigServiceInterface $configService,
+        private YoutubeVideoServiceInterface $youtubeVideoService,
+        private FileWriterServiceInterface $excelFileWriterService
     ) {
-        $this->cliArgsService = $cliArgsService;
-        $this->configService = $configService;
-        $this->youtubeVideoService = $youtubeVideoService;
-        $this->excelFileWriterService = $excelFileWriterService;
     }
 
     /**
@@ -64,10 +40,11 @@ class YoutubeVideoSearchApplication
      */
     public function search(): void
     {
-        $keyword = $this->cliArgsService->getArgs();
+        $inputArgs = $this->cliArgsService->getArgs();
 
-        if ($this->validateInput($keyword) === true) {
-            $youtubeVideos = $this->youtubeVideoService->searchAndSortByViewCountDescending(urlencode($keyword[0]));
+        if ($this->validateInput($inputArgs) === true) {
+            $keyword = urlencode(current($inputArgs));
+            $youtubeVideos = $this->youtubeVideoService->searchAndSortByViewCountDescending($keyword);
 
             if (count($youtubeVideos) > 0) {
                 $fileName = $this->configService->getExcelFile();
@@ -82,14 +59,14 @@ class YoutubeVideoSearchApplication
     }
 
     /**
-     * @param array $keyword
+     * @param array $inputArgs
      * @return bool
      */
-    private function validateInput(array $keyword): bool
+    private function validateInput(array $inputArgs): bool
     {
         $arraySizeValidator = new ArraySizeValidator();
 
-        if ($arraySizeValidator->isValid($keyword, self::INPUT_SIZE) === false) {
+        if ($arraySizeValidator->isValid($inputArgs, self::INPUT_SIZE) === false) {
             echo $arraySizeValidator->getErrorMessage() . PHP_EOL;
 
             return false;
@@ -97,7 +74,7 @@ class YoutubeVideoSearchApplication
 
         $searchKeywordValidator = new SearchKeywordValidator();
 
-        if ($searchKeywordValidator->isValid($keyword[0]) === false) {
+        if ($searchKeywordValidator->isValid($inputArgs[0]) === false) {
             echo $searchKeywordValidator->getErrorMessage() . PHP_EOL;
 
             return false;

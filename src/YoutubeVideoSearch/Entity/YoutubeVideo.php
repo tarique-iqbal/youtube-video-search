@@ -11,27 +11,27 @@ class YoutubeVideo
     /**
      * @var string
      */
-    private $title;
+    private string $title;
 
     /**
      * @var string
      */
-    private $channelTitle;
+    private string $channelTitle;
 
     /**
      * @var string|null
      */
-    private $viewCount;
+    private ?string $viewCount;
 
     /**
      * @var string|null
      */
-    private $likeCount;
+    private ?string $likeCount;
 
     /**
      * @var string
      */
-    private $url;
+    private string $url;
 
     /**
      * @return string

@@ -25,12 +25,12 @@ class ExcelFileWriterService implements FileWriterServiceInterface
     /**
      * @var Spreadsheet
      */
-    private $spreadsheet;
+    private Spreadsheet $spreadsheet;
 
     /**
      * @var Xlsx
      */
-    private $xlsx;
+    private Xlsx $xlsx;
 
     /**
      * ExcelFileWriterService constructor.

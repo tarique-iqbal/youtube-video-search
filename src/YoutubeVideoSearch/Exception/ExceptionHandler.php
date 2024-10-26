@@ -8,20 +8,14 @@ use YoutubeVideoSearch\Service\ConfigServiceInterface;
  * Class ExceptionHandler
  * @package YoutubeVideoSearch\Exception
  */
-class ExceptionHandler
+final readonly class ExceptionHandler
 {
-    /**
-     * @var ConfigServiceInterface
-     */
-    private $configService;
-
     /**
      * ExceptionHandler constructor.
      * @param ConfigServiceInterface $configService
      */
-    public function __construct(ConfigServiceInterface $configService)
+    public function __construct(private ConfigServiceInterface $configService)
     {
-        $this->configService = $configService;
     }
 
     /**
@@ -35,6 +29,7 @@ class ExceptionHandler
         $logFile = $this->configService->getErrorLogFile();
 
         error_log($message . PHP_EOL, 3, $logFile);
-        echo 'Exception occurred! Please check errors log file.' . PHP_EOL;
+
+        echo sprintf('Exception occurred! Please check errors log file.%s', PHP_EOL);
     }
 }

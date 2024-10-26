@@ -11,7 +11,7 @@ class ArraySizeValidator
     /**
      * @var string
      */
-    private $errorMessage;
+    private string $errorMessage;
 
     /**
      * @param array $array
