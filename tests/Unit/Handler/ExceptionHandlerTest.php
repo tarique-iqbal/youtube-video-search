@@ -1,10 +1,10 @@
 <?php declare(strict_types = 1);
 
-namespace Tests\Unit\Exception;
+namespace Tests\Unit\Handler;
 
 use bovigo\vfs\vfsStream;
 use PHPUnit\Framework\TestCase;
-use YoutubeVideoSearch\Exception\ExceptionHandler;
+use YoutubeVideoSearch\Handler\ExceptionHandler;
 use YoutubeVideoSearch\Service\ConfigServiceInterface;
 
 class ExceptionHandlerTest extends TestCase

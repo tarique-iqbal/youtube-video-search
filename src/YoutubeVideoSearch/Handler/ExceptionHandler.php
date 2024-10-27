@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace YoutubeVideoSearch\Exception;
+namespace YoutubeVideoSearch\Handler;
 
 use YoutubeVideoSearch\Service\ConfigServiceInterface;
 

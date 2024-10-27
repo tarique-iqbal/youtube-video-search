@@ -7,7 +7,7 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use PHPUnit\Framework\TestCase;
 use Pimple\Container;
 use YoutubeVideoSearch\Container\ContainerFactory;
-use YoutubeVideoSearch\Exception\ExceptionHandler;
+use YoutubeVideoSearch\Handler\ExceptionHandler;
 use YoutubeVideoSearch\Service\CliArgsService;
 use YoutubeVideoSearch\Service\ConfigService;
 use YoutubeVideoSearch\Service\CurlService;
