@@ -2,6 +2,7 @@
 
 namespace Tests\Integration;
 
+use Assert\LazyAssertionException;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use YoutubeVideoSearch\Container\ContainerFactory;
@@ -82,31 +83,27 @@ class YoutubeVideoSearchApplicationTest extends TestCase
         return [
             [
                 [],
-                'Invalid input length.' . PHP_EOL
             ],
             [
                 ['Search', 'Keyword'],
-                'Invalid input length.' . PHP_EOL
             ],
             [
                 [''],
-                'Search keyword can not be empty.' . PHP_EOL
             ],
             [
                 ['@#56%*'],
-                'Search keyword should contain alphabets.' . PHP_EOL
             ],
         ];
     }
 
     #[DataProvider('addInvalidInputProvider')]
-    public function testSearchWithInvalidInput(array $invalidInputArgs, string $expectOutputString): void
+    public function testSearchWithInvalidInput(array $invalidInputArgs): void
     {
+        $this->expectException(LazyAssertionException::class);
+
         $this->cliArgsService
             ->method('getArgs')
             ->willReturn($invalidInputArgs);
-
-        $this->expectOutputString($expectOutputString);
 
         $this->youtubeVideoSearchApplication->search();
     }

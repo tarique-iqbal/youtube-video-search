@@ -2,14 +2,13 @@
 
 namespace YoutubeVideoSearch;
 
+use Assert\Assert;
 use PhpOffice\PhpSpreadsheet\Exception;
 use PhpOffice\PhpSpreadsheet\Writer\Exception as WriterException;
 use YoutubeVideoSearch\Service\CliArgsServiceInterface;
 use YoutubeVideoSearch\Service\ConfigServiceInterface;
 use YoutubeVideoSearch\Service\FileWriterServiceInterface;
 use YoutubeVideoSearch\Service\YoutubeVideoServiceInterface;
-use YoutubeVideoSearch\Validator\ArraySizeValidator;
-use YoutubeVideoSearch\Validator\SearchKeywordValidator;
 
 final readonly class YoutubeVideoSearchApplication
 {
@@ -30,41 +29,24 @@ final readonly class YoutubeVideoSearchApplication
     public function search(): void
     {
         $inputArgs = $this->cliArgsService->getArgs();
+        $keyword = current($inputArgs);
 
-        if ($this->validateInput($inputArgs) === true) {
-            $keyword = urlencode(current($inputArgs));
-            $youtubeVideos = $this->youtubeVideoService->searchAndSortByViewCountDescending($keyword);
+        Assert::lazy()
+            ->that($inputArgs, 'inputArgs')->isArray()->count(self::INPUT_SIZE)
+            ->that($keyword, 'keyword')->regex('/^[a-z]{1}[a-z0-9.\-\'\s]+$/i')
+            ->verifyNow();
 
-            if (count($youtubeVideos) > 0) {
-                $fileName = $this->configService->getExcelFile();
+        $keyword = urlencode($keyword);
+        $youtubeVideos = $this->youtubeVideoService->searchAndSortByViewCountDescending($keyword);
 
-                $this->excelFileWriterService->write($fileName, $youtubeVideos);
+        if (count($youtubeVideos) > 0) {
+            $fileName = $this->configService->getExcelFile();
 
-                echo 'YouTube videos search and excel file has been written successfully.' . PHP_EOL;
-            } else {
-                echo 'YouTube video search result is empty.' . PHP_EOL;
-            }
+            $this->excelFileWriterService->write($fileName, $youtubeVideos);
+
+            echo 'YouTube videos search and excel file has been written successfully.' . PHP_EOL;
+        } else {
+            echo 'YouTube video search result is empty.' . PHP_EOL;
         }
-    }
-
-    private function validateInput(array $inputArgs): bool
-    {
-        $arraySizeValidator = new ArraySizeValidator();
-
-        if ($arraySizeValidator->isValid($inputArgs, self::INPUT_SIZE) === false) {
-            echo $arraySizeValidator->getErrorMessage() . PHP_EOL;
-
-            return false;
-        }
-
-        $searchKeywordValidator = new SearchKeywordValidator();
-
-        if ($searchKeywordValidator->isValid($inputArgs[0]) === false) {
-            echo $searchKeywordValidator->getErrorMessage() . PHP_EOL;
-
-            return false;
-        }
-
-        return true;
     }
 }
