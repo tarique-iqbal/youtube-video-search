@@ -7,6 +7,10 @@ A small command-line utility that will search YouTube videos by keyword and the 
 composer
 php (>=8.2)
 ```
+OR
+```
+Docker (if you choose to use it)
+```
 
 ## Note
 The application will now work if [register_argc_argv](http://php.net/manual/en/ini.core.php#ini.register-argc-argv) is disabled.
@@ -58,3 +62,18 @@ $ ./vendor/bin/phpunit tests
 ```
 
 Test-cases, test unit and integration tests.
+
+## Run the script in a Docker container
+- Build the Docker Image
+```shell
+$ docker build --no-cache -t youtube_video_search .
+```
+
+- Run the Container and script
+```shell
+$ docker run -it --rm youtube_video_search
+$ php index.php keyword
+or
+$ php index.php 'Search keyword'
+$ ./vendor/bin/phpunit tests
+```
